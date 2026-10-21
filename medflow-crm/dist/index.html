@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedFlow — управление процедурами</title>
+  <meta name="description" content="Панель администратора медицинского центра с WhatsApp-напоминаниями пациентам." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">M</span><span>MedFlow</span></div>
+      <nav>
+        <button class="nav-item active" data-view="dashboard"><span>⌂</span>Главная</button>
+        <button class="nav-item" data-view="patients"><span>◉</span>Пациенты</button>
+        <button class="nav-item" data-view="schedule"><span>□</span>Расписание</button>
+        <button class="nav-item" data-view="messages"><span>◇</span>Сообщения <b>3</b></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="wa-state"><span class="pulse"></span><div><strong>WhatsApp подключён</strong><small>Тестовый режим</small></div></div>
+        <div class="profile"><span>АС</span><div><strong>Айжан Сериковна</strong><small>Администратор</small></div></div>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+        <div><p class="eyebrow">ВТОРНИК, 21 ОКТЯБРЯ</p><h1 id="page-title">Добрый день, Айжан</h1></div>
+        <div class="header-actions"><form action="/logout" method="post"><button class="icon-btn" aria-label="Выйти" title="Выйти">↪</button></form><button class="primary" id="new-visit">＋ Назначить визит</button></div>
+      </header>
+
+      <section id="dashboard" class="view active">
+        <div class="stats">
+          <article><span class="stat-icon blue">↗</span><div><small>Сегодня процедур</small><strong>18</strong><em>12 завершено</em></div></article>
+          <article><span class="stat-icon green">✓</span><div><small>Подтвердили визит</small><strong>14</strong><em>78% пациентов</em></div></article>
+          <article><span class="stat-icon orange">⌁</span><div><small>Ждут ответа</small><strong>3</strong><em>Нужно связаться</em></div></article>
+          <article><span class="stat-icon violet">◇</span><div><small>Сообщений сегодня</small><strong>26</strong><em>Доставлено 25</em></div></article>
+        </div>
+
+        <div class="layout-grid">
+          <section class="panel visits-panel">
+            <div class="panel-head"><div><h2>Ближайшие процедуры</h2><p>Расписание на сегодня</p></div><button class="text-btn" data-go="schedule">Все расписание →</button></div>
+            <div class="visit-row"><time>10:30</time><span class="avatar lavender">АС</span><div class="visit-info"><strong>Амина Садуакасова</strong><small>Физиотерапия · каб. 204</small></div><span class="tag done">Завершено</span><button class="dots">•••</button></div>
+            <div class="visit-row current"><time>11:20</time><span class="avatar peach">МТ</span><div class="visit-info"><strong>Марат Тлеубаев</strong><small>Лазерная терапия · каб. 107</small></div><span class="tag process">На приёме</span><button class="dots">•••</button></div>
+            <div class="visit-row"><time>12:00</time><span class="avatar mint">ЕН</span><div class="visit-info"><strong>Елена Новикова</strong><small>Массаж · каб. 302</small></div><span class="tag confirmed">Подтверждено</span><button class="dots">•••</button></div>
+            <div class="visit-row"><time>12:40</time><span class="avatar sky">ДК</span><div class="visit-info"><strong>Данияр Касымов</strong><small>Перевязка · каб. 116</small></div><span class="tag waiting">Ждём ответа</span><button class="dots">•••</button></div>
+          </section>
+
+          <aside class="panel activity-panel">
+            <div class="panel-head"><div><h2>WhatsApp</h2><p>Последние уведомления</p></div><span class="online">● онлайн</span></div>
+            <div class="message"><span class="msg-icon sent">✓</span><div><strong>Амина Садуакасова</strong><p>Напоминание доставлено</p><small>10:02</small></div></div>
+            <div class="message"><span class="msg-icon reply">↩</span><div><strong>Елена Новикова</strong><p>Подтвердила визит</p><small>09:48</small></div></div>
+            <div class="message"><span class="msg-icon wait">⋯</span><div><strong>Данияр Касымов</strong><p>Ожидаем ответа</p><small>09:31</small></div></div>
+            <button class="secondary wide" data-go="messages">Открыть журнал</button>
+          </aside>
+        </div>
+
+        <section class="panel attention">
+          <div class="panel-head"><div><h2>Требуют внимания</h2><p>Пациенты без подтверждения или с изменениями</p></div></div>
+          <div class="attention-grid">
+            <div class="attention-card"><span class="avatar sky">ДК</span><div><strong>Данияр Касымов</strong><small>Сегодня, 12:40 · не ответил</small></div><button class="secondary send-reminder">Напомнить</button></div>
+            <div class="attention-card"><span class="avatar rose">ОБ</span><div><strong>Ольга Белова</strong><small>Завтра, 09:00 · просит перенос</small></div><button class="secondary">Перенести</button></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="patients" class="view">
+        <div class="panel"><div class="panel-head"><div><h2>Пациенты</h2><p>Карточки и история процедур</p></div><input class="search" placeholder="Поиск по имени или телефону" /></div><div id="patients-table"></div></div>
+      </section>
+      <section id="schedule" class="view">
+        <div class="panel"><div class="panel-head"><div><h2>Расписание</h2><p>21–27 октября</p></div><button class="primary" id="new-visit-2">＋ Назначить</button></div><div class="calendar" id="calendar"></div></div>
+      </section>
+      <section id="messages" class="view">
+        <div class="panel"><div class="panel-head"><div><h2>Журнал сообщений</h2><p>Доставка и ответы пациентов</p></div><span class="online">● WhatsApp подключён</span></div><div id="message-log"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="visit-dialog">
+    <form method="dialog" id="visit-form">
+      <div class="dialog-head"><div><p class="eyebrow">НОВАЯ ЗАПИСЬ</p><h2>Назначить процедуру</h2></div><button value="cancel" class="close" aria-label="Закрыть">×</button></div>
+      <label>Пациент<select id="patient"><option>Амина Садуакасова</option><option>Марат Тлеубаев</option><option>Елена Новикова</option><option>Данияр Касымов</option></select></label>
+      <label>Процедура<input id="procedure" value="Физиотерапия" required /></label>
+      <div class="form-row"><label>Дата<input id="date" type="date" value="2026-10-22" required /></label><label>Время<input id="time" type="time" value="10:00" required /></label></div>
+      <label>Врач<select><option>Данияр Серикович</option><option>Айгуль Маратовна</option><option>Елена Викторовна</option></select></label>
+      <label class="check"><input type="checkbox" checked /> Отправить WhatsApp-подтверждение сразу</label>
+      <div class="preview"><strong>Предпросмотр сообщения</strong><p>Здравствуйте! Ваша следующая процедура назначена на <span id="preview-date">22.10.2026 в 10:00</span>. Ответьте «1», чтобы подтвердить запись.</p></div>
+      <div class="dialog-actions"><button value="cancel" class="secondary">Отмена</button><button value="default" class="primary" id="save-visit">Назначить и отправить</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast"><span>✓</span><div><strong>Визит назначен</strong><small>WhatsApp-сообщение поставлено в очередь</small></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
+
